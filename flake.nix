@@ -21,6 +21,11 @@
           users.lorlike = ./home-manager/home.nix;
         };
       };
+      common_modules = [
+        ./nixos/common.nix
+        home-manager.nixosModules.home-manager
+        homeManagerModule
+      ];
     in {
       nixosConfigurations = {
         # WSL 虚拟机: sudo nixos-rebuild switch --flake .#wsl
@@ -28,22 +33,16 @@
           inherit system;
           modules = [
             nixos-wsl.nixosModules.default
-            ./nixos/common.nix
             ./nixos/wsl.nix
-            home-manager.nixosModules.home-manager
-            homeManagerModule
-          ];
+          ]++common_modules;
         };
 
         # 物理机: sudo nixos-rebuild switch --flake .#pc
         pc = nixpkgs.lib.nixosSystem {
           inherit system;
           modules = [
-            ./nixos/common.nix
             ./nixos/pc.nix
-            home-manager.nixosModules.home-manager
-            homeManagerModule
-          ];
+          ]++common_modules;
         };
       };
     };
