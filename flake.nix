@@ -8,9 +8,10 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    agenix.url = "github:ryantm/agenix";
   };
 
-  outputs = { nixpkgs, home-manager, nixos-wsl, ... }:
+  outputs = { nixpkgs, home-manager, nixos-wsl, agenix, ... }:
     let
       system = "x86_64-linux";
       # 两个 host 共用的 home-manager 配置
@@ -19,12 +20,16 @@
           useUserPackages = true;
           useGlobalPkgs = true;
           users.lorlike = ./home-manager/home.nix;
+          sharedModules = [ agenix.homeManagerModules.default ];
         };
       };
       common_modules = [
         ./nixos/common.nix
         home-manager.nixosModules.home-manager
         homeManagerModule
+        {
+          environment.systemPackages = [ agenix.packages.${system}.default ];
+        }
       ];
     in {
       nixosConfigurations = {

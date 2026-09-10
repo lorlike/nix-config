@@ -35,6 +35,12 @@
         export HTTPS_PROXY="$https_proxy"
         export ALL_PROXY="$all_proxy"
       fi
+
+      # 加载 agenix 解密的隐私环境变量（如 API key）
+      # 解密路径为 $XDG_RUNTIME_DIR/agenix/env（home-manager 激活时由用户身份解密）
+      if [ -n "$XDG_RUNTIME_DIR" ] && [ -r "$XDG_RUNTIME_DIR/agenix/env" ]; then
+        source "$XDG_RUNTIME_DIR/agenix/env"
+      fi
     '';
   };
 
