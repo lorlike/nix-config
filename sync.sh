@@ -2,6 +2,9 @@
 # 用法: ./sync.sh [wsl|pc]  （不带参数时按 /proc/version 判断，含 microsoft 即 WSL）
 set -euo pipefail
 
+# 先切换到本脚本所在目录，确保 nix flake check / nixos-rebuild 解析到当前 flake
+cd "$(dirname "$0")"
+
 host="${1:-}"
 if [[ -z "$host" ]]; then
   if grep -qi microsoft /proc/version 2>/dev/null; then
