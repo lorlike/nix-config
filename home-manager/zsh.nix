@@ -24,17 +24,17 @@
     ];
 
     initContent = ''
-      WIN_HOST="$(ip route | awk '/default/ {print $3; exit}')"
+      # WIN_HOST="$(ip route | awk '/default/ {print $3; exit}')"
 
-      if [ -n "$WIN_HOST" ]; then
-        export http_proxy="http://$WIN_HOST:7897"
-        export https_proxy="http://$WIN_HOST:7897"
-        export all_proxy="http://$WIN_HOST:7897"
+      # if [ -n "$WIN_HOST" ]; then
+      #   export http_proxy="http://$WIN_HOST:7897"
+      #   export https_proxy="http://$WIN_HOST:7897"
+      #   export all_proxy="http://$WIN_HOST:7897"
 
-        export HTTP_PROXY="$http_proxy"
-        export HTTPS_PROXY="$https_proxy"
-        export ALL_PROXY="$all_proxy"
-      fi
+      #   export HTTP_PROXY="$http_proxy"
+      #   export HTTPS_PROXY="$https_proxy"
+      #   export ALL_PROXY="$all_proxy"
+      # fi
 
       # 加载 agenix 解密的隐私环境变量（如 API key）
       # 解密路径为 $XDG_RUNTIME_DIR/agenix/env（home-manager 激活时由用户身份解密）

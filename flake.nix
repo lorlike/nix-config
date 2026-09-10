@@ -2,13 +2,13 @@
   description = "Your new nix config";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nixpkgs.url = "git+https://mirrors.tuna.tsinghua.edu.cn/git/nixpkgs.git?ref=nixos-unstable&shallow=1";
     nixos-wsl.url = "git+https://ghfast.top/https://github.com/nix-community/NixOS-WSL.git?ref=main";
     home-manager = {
-      url = "github:nix-community/home-manager";
+      url = "git+https://ghfast.top/https://github.com/nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    agenix.url = "github:ryantm/agenix";
+    agenix.url = "git+https://ghfast.top/https://github.com/ryantm/agenix";
   };
 
   outputs = { nixpkgs, home-manager, nixos-wsl, agenix, ... }:
