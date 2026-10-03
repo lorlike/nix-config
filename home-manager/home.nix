@@ -5,19 +5,20 @@
     ./zsh.nix
     ./yazi.nix
     ./tmux.nix
+    # ./nixvim-pure
   ];
 
   home.username = "lorlike";
   home.homeDirectory = "/home/lorlike";
   home.stateVersion = "26.05";
   home.packages = with pkgs; [
+    helix
     btop
 
     gcc
     rustc
     cargo
 
-    yazi
     lazygit
 
     nodejs
@@ -54,6 +55,4 @@
       };
     };
   };
-
-
 }

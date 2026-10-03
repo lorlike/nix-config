@@ -9,9 +9,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     agenix.url = "git+https://ghfast.top/https://github.com/ryantm/agenix";
+    nixvim.url = "git+https://ghfast.top/https://github.com/nix-community/nixvim";
   };
 
-  outputs = { nixpkgs, home-manager, nixos-wsl, agenix, ... }:
+  outputs = { nixpkgs, home-manager, nixos-wsl, agenix, nixvim, ... }:
     let
       system = "x86_64-linux";
       # 两个 host 共用的 home-manager 配置
@@ -20,7 +21,10 @@
           useUserPackages = true;
           useGlobalPkgs = true;
           users.lorlike = ./home-manager/home.nix;
-          sharedModules = [ agenix.homeManagerModules.default ];
+          sharedModules = [
+            agenix.homeManagerModules.default
+            nixvim.homeModules.nixvim
+          ];
         };
       };
       common_modules = [

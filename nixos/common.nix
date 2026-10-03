@@ -17,9 +17,13 @@
   };
 
   environment.systemPackages = with pkgs; [
-    neovim
+    # neovim
     git wget curl zsh
   ];
+
+  programs.git.config = {
+    url."https://github.com/".insteadOf = "https://ghfast.top/https://github.com/";
+  };
 
   programs.zsh.enable = true;
   programs.nix-ld.enable = true;
@@ -33,9 +37,6 @@
     ];
   };
 
-  environment.variables = {
-    EDITOR = "nvim";
-  };
 
   # 首次安装 NixOS 时使用的版本，之后不要改动
   system.stateVersion = "26.05";
